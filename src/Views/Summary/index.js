@@ -4,8 +4,6 @@ const Summary = ()=> {
   return(
     <>
       <BalanceCard></BalanceCard>
-      <BalanceCard></BalanceCard>
-      <BalanceCard></BalanceCard>
     </>
   )
 }
