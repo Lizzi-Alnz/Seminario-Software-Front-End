@@ -1,22 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
-import Summary from './Views/Summary';
+import { useState, useEffect } from 'react';
+import Splash from './Views/Splash';
+import Routes from './Routes';
 
 function App() {
+  const [appLoaded, setAppLoaded] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setAppLoaded(true);
+    }, 3000);
+  }
+    , []);
   return (
-   <>
-    <header>
-    <h1>SW 202202</h1>
-    <h2>Ochenta Front-End</h2>
-    </header>
-
-    <main>
-      <Summary></Summary>
-    </main>
-    <footer>
-    <div>Derechos Reservados 2022 ICC UNICAH</div>
-    </footer>
-   </>
+    <>
+      {!appLoaded && <Splash />}
+      {appLoaded && <Routes />}
+    </>
   );
 }
 
