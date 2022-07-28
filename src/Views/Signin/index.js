@@ -1,6 +1,7 @@
-import SignInUx from "./SignIn";
+import SignInUx from "./SignInUx";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import getSignIn from "../../Services/api/signinapi";
 
 const SignIn = () => {
   const Navigator = useNavigate();
@@ -13,10 +14,18 @@ const SignIn = () => {
     }
     setFormValues(newFormValues);
   }
-  const onSignInClick = (e) => {
+  const onSignInClick = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    alert(JSON.stringify(formValues));
+    try {
+      const data = await getSignIn(
+        formValues.email,
+        formValues.password
+      );
+      Navigator('/login');
+    } catch (ex) {
+      console.log(ex);
+    }
   }
   const onLoginClick = (e) => {
     e.preventDefault();
@@ -29,6 +38,7 @@ const SignIn = () => {
       emailValue={formValues.email}
       onSignInClick={onSignInClick}
       onLoginClick={onLoginClick}
+      onChangeHandler={onChangeHandler}
     />
   );
 }
